@@ -3,6 +3,13 @@ from game import resources, load
 
 game_window = pyglet.window.Window(800, 600)
 
+
+@game_window.event
+def on_draw():
+    game_window.clear()
+    main_batch.draw()
+
+
 main_batch = pyglet.graphics.Batch()
 
 level_label = pyglet.text.Label(
@@ -22,10 +29,15 @@ player_lives = load.player_lives(5, batch=main_batch)
 score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)
 
 
-@game_window.event
-def on_draw():
-    game_window.clear()
-    main_batch.draw()
+game_objects = [player_ship] + asteroids
+
+
+def update(dt):
+    for obj in game_objects:
+        obj.update(dt)
+
+
+pyglet.clock.schedule_interval(update, 1 / 120.0)
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
 import math
 import pyglet
 import random
-from v1.game import resources
-from v1.game.physical_object import PhysicalObject
+from game import resources
+from game.physical_object import PhysicalObject
 
 
 def distance(point_1=(0, 0), point_2=(0, 0)):

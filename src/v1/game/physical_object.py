@@ -10,7 +10,6 @@ class PhysicalObject(pyglet.sprite.Sprite):
     def update(self, dt):
         self.x += self.velocity_x * dt
         self.y += self.velocity_y * dt
-        self.rotation += 1
         self.check_bounds()
 
     def check_bounds(self):

@@ -1,5 +1,5 @@
 import pyglet
-from game import resources, load
+from game import resources, load, player
 
 game_window = pyglet.window.Window(800, 600)
 
@@ -20,9 +20,9 @@ level_label = pyglet.text.Label(
     batch=main_batch,
 )
 
-player_ship = pyglet.sprite.Sprite(
-    img=resources.player_image, x=400, y=300, batch=main_batch
-)
+player_ship = player.Player(x=400, y=300, batch=main_batch)
+
+game_window.push_handlers(player_ship)
 
 asteroids = load.asteroids(3, player_ship.position, batch=main_batch)
 player_lives = load.player_lives(5, batch=main_batch)

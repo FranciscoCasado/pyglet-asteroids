@@ -18,6 +18,7 @@ player_ship = pyglet.sprite.Sprite(
 )
 
 asteroids = load.asteroids(3, player_ship.position, batch=main_batch)
+player_lives = load.player_lives(5, batch=main_batch)
 score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)
 
 

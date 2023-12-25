@@ -23,6 +23,7 @@ level_label = pyglet.text.Label(
 player_ship = player.Player(x=400, y=300, batch=main_batch)
 
 game_window.push_handlers(player_ship)
+game_window.push_handlers(player_ship.key_handler)
 
 asteroids = load.asteroids(3, player_ship.position, batch=main_batch)
 player_lives = load.player_lives(5, batch=main_batch)

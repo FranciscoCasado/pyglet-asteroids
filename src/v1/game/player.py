@@ -1,8 +1,9 @@
 import math
 
+from pyglet import sprite
 from pyglet.window import key
 
-from game.resources import player_image
+from game.resources import player_image, engine_image
 from game.physical_object import PhysicalObject
 
 
@@ -12,9 +13,14 @@ class Player(PhysicalObject):
         self.thrust = 300.0
         self.rotate_speed = 200.0
         self.key_handler = key.KeyStateHandler()
+        self.engine_sprite = sprite.Sprite(img=engine_image, *args, **kwargs)
+        self.engine_sprite.visible = False
 
     def update(self, dt):
         super(Player, self).update(dt)
+        self.engine_sprite.rotation = self.rotation
+        self.engine_sprite.x = self.x
+        self.engine_sprite.y = self.y
 
         if self.key_handler[key.LEFT]:
             self.rotation -= self.rotate_speed * dt
@@ -23,6 +29,10 @@ class Player(PhysicalObject):
 
         if self.key_handler[key.UP]:
             self._accelerate(dt)
+            self.engine_sprite.visible = True
+        else:
+            self.engine_sprite.visible = False
+
         if self.key_handler[key.DOWN]:
             self._deaccelerate(dt)
 

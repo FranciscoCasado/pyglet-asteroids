@@ -1,5 +1,5 @@
 import pyglet
-from game import resources, load, player
+from game import load, player
 
 game_window = pyglet.window.Window(800, 600)
 
@@ -34,8 +34,30 @@ game_objects = [player_ship] + asteroids
 
 
 def update(dt):
+    check_collisions(game_objects)
+    remove_dead_objects(game_objects)
+
     for obj in game_objects:
         obj.update(dt)
+
+
+def check_collisions(game_objects):
+    for i in range(len(game_objects)):
+        for j in range(i + 1, len(game_objects)):
+            obj_1 = game_objects[i]
+            obj_2 = game_objects[j]
+
+            if not obj_1.dead and not obj_2.dead:
+                if obj_1.collides_with(obj_2):
+                    obj_1.handle_collision_with(obj_2)
+                    obj_2.handle_collision_with(obj_1)
+
+
+def remove_dead_objects(game_objects):
+    dead = [obj for obj in game_objects if obj.dead]
+    for obj in dead:
+        obj.delete()
+        game_objects.remove(obj)
 
 
 pyglet.clock.schedule_interval(update, 1 / 120.0)

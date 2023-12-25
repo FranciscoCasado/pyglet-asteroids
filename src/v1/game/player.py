@@ -49,3 +49,7 @@ class Player(PhysicalObject):
         force_y = math.sin(angle_radians) * self.thrust * dt
         self.velocity_x -= force_x
         self.velocity_y -= force_y
+
+    def delete(self):
+        self.engine_sprite.delete()
+        super(Player, self).delete()

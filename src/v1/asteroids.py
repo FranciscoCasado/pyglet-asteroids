@@ -35,7 +35,6 @@ game_objects = [player_ship] + asteroids
 
 def update(dt):
     check_collisions(game_objects)
-    remove_dead_objects(game_objects)
 
     new_objects = []
     for obj in game_objects:
@@ -43,6 +42,7 @@ def update(dt):
         new_objects.extend(obj.new_objects)
         obj.new_objects = []
 
+    remove_dead_objects(game_objects)
     game_objects.extend(new_objects)
 
 

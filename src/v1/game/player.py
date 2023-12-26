@@ -17,6 +17,8 @@ class Player(PhysicalObject):
         self.engine_sprite.visible = False
         self.bullet_speed = 700.0
         self.reacts_to_bullets = False
+        self.fire_rate = 0.5
+        self.bullet_ready = True
 
     def update(self, dt):
         super(Player, self).update(dt)
@@ -60,6 +62,9 @@ class Player(PhysicalObject):
         super(Player, self).delete()
 
     def fire(self):
+        if not self.bullet_ready:
+            return
+
         angle_radians = -math.radians(self.rotation)
         ship_radius = self.image.width / 2
         bullet_x = self.x + math.cos(angle_radians) * ship_radius
@@ -72,6 +77,11 @@ class Player(PhysicalObject):
         new_bullet.velocity_y = bullet_vy
 
         self.new_objects.append(new_bullet)
+        self.bullet_ready = False
+        clock.schedule_once(self.reload_bullet, self.fire_rate)
+
+    def reload_bullet(self, dt):
+        self.bullet_ready = True
 
 
 class Bullet(PhysicalObject):

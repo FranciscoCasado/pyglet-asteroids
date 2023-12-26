@@ -36,10 +36,9 @@ class PhysicalObject(pyglet.sprite.Sprite):
     def collides_with(self, other: Self):
         if not self.reacts_to_bullets and other.is_bullet:
             return False
-        
+
         if self.is_bullet and not other.reacts_to_bullets:
             return False
-
 
         collision_distance = self.image.width / 2 + other.image.width / 2
         actual_distance = util.distance(self.position, other.position)

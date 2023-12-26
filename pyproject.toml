@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "flappin"
+name = "asteroids"
 version = "0.1.0"
-description = "Flapping bird game"
+description = "Asteroids"
 authors = ["Francisco Casado <hola@franciscocasado.cl>"]
 license = "MIT"
 readme = "README.md"

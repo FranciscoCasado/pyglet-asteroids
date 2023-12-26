@@ -37,8 +37,13 @@ def update(dt):
     check_collisions(game_objects)
     remove_dead_objects(game_objects)
 
+    new_objects = []
     for obj in game_objects:
         obj.update(dt)
+        new_objects.extend(obj.new_objects)
+        obj.new_objects = []
+
+    game_objects.extend(new_objects)
 
 
 def check_collisions(game_objects):
